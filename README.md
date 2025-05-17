@@ -1,9 +1,11 @@
-# BREADTH-FIRST-SEARCH
 <h1>ExpNo 3 : Implement Breadth First Search Traversal of a Graph</h1> 
-<h3>Name:  </h3>
-<h3>Register Number: </h3>
+
+<h3>Name: Yuvarani T</h3>
+<h3>Register Number: 212222110057</h3>
+
 <H3>Aim:</H3>
 <p>To Implement Breadth First Search Traversal of a Graph using Python 3.</p>
+
 <h3>Theory:</h3>
 <p>Breadth-First Traversal (or Search) for a graph is like the Breadth-First Traversal of a tree.
 The only catch here is that, unlike trees, graphs may contain cycles so that we may come to the same node again. To avoid processing a node more than once, we divide the vertices into two categories:
@@ -21,12 +23,10 @@ Step1: Initially queue and visited arrays are empty.
 
 ![image](https://github.com/natsaravanan/19AI405FUNDAMENTALSOFARTIFICIALINTELLIGENCE/assets/87870499/8acdebf8-ecc2-4d10-a208-45cce441f059)
 
-
 Queue and visited arrays are empty initially.
 Step2: Push node 0 into queue and mark it visited.
 
 ![image](https://github.com/natsaravanan/19AI405FUNDAMENTALSOFARTIFICIALINTELLIGENCE/assets/87870499/0e9ce012-8e1f-43d7-b7b9-c0fb19fe0c3f)
-
 
 Push node 0 into queue and mark it visited.
 Step 3: Remove node 0 from the front of queue and visit the unvisited neighbours and push them into queue.
@@ -54,7 +54,6 @@ As we can see that every neighbours of node 4 are visited, so move to the next n
 Remove node 4 from the front of queue and visit the unvisited neighbours and push them into queue.
 Now, Queue becomes empty, So, terminate these process of iteration.
 
-
 <hr>
 <h2>Algorithm:</h2>
 <hr>
@@ -65,9 +64,36 @@ Now, Queue becomes empty, So, terminate these process of iteration.
 <li>Find its Successors Or neighbors and Check whether the node is visited or not.</li>
 <li>If Not Visited, add it to the Queue. Else Continue.</li>
 <li>Iterate steps 4 and 5 until all nodes get visited, and there are no more unvisited nodes.</li>
-
 </ol>
-
+<hr>
+<h3>Program</h3>
+<pre>
+from collections import deque, defaultdict
+def bfs(graph, start, visited, path):
+    queue = deque()
+    path.append(start)
+    queue.append(start)
+    visited[start] = True
+    while queue:
+        tmpnode = queue.popleft()
+        for neighbour in graph[tmpnode]:
+            if not visited[neighbour]:
+                path.append(neighbour)
+                queue.append(neighbour)
+                visited[neighbour] = True
+    return path
+graph = defaultdict(list)
+v, e = map(int, input().split())
+for _ in range(e):
+    u, dest = input().split()
+    graph[u].append(dest)
+    graph[dest].append(u)
+start = next(iter(graph))  # start from any arbitrary node
+path = []
+visited = defaultdict(bool)
+traversed_path = bfs(graph, start, visited, path)
+print(traversed_path)
+</pre>
 <hr>
 <h3>Sample Input</h3>
 <hr>
@@ -87,6 +113,9 @@ G F <BR>
 ['A', 'B', 'C', 'F', 'E', 'D', 'G']
 
 <hr>
+<h3>Output</h3>
+
+![{D20F630D-DDA0-4222-8674-F19C78630C63}](https://github.com/user-attachments/assets/872bac4e-44cb-467f-9b8f-5961ecbfd9b6)
 
 <hr>
 <h3>Sample Input</h3>
@@ -102,6 +131,11 @@ G F <BR>
 <h3>Sample Output</h3>
 <hr>
 ['0', '1', '2', '3', '4']
+<hr>
+<h3>Output</h3>
+
+![{18C579DF-A071-4C19-9F6B-798E99685CC8}](https://github.com/user-attachments/assets/0bfbfccb-4c10-4ba7-921d-ff2c7cd069ee)
+
 <hr>
 <h3>Result:</h3>
 <hr>
